@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Province</title>
+
+    <!---------------------------------  Style  --------------------------------->
+
+    <style>
+
+        table{border:medium;border-collapse:collapse;border-color:black;margin:5%;margin-top:0%;width:90%}
+        th{background-color: rgba(79, 206, 28, 0.63);width:30%;font-family:Arial;font-size:28px}
+        tr:hover{font-weight:bold;font-size:20px}
+        td{width:28%;height:30px;font-family:Arial}
+        .dispari{background-color:rgba(63, 19, 191, 0.33);}
+        .pari{background-color:rgba(221, 47, 63, 0.26);}
+        .numeri{width:6%;font-size:15px}
+        body{font-family:Arial;font-size:20px;}
+
+        /*input{font-size:20px;font-weight:bold;}*/
+     
+
+        /* ------------------- INPUTBOX ------------------------ */
+
+        input[type=text] {
+            width: 300px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+            }
+        input[type=text]:focus {
+            width: 100%;
+            }
+
+
+        /* -------------------- Alert Box --------------------- */
+
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            }
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 25px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            }
+        .closebtn:hover {
+            color: black;
+            }
+        
+    </style>
+
+
+    <!---------------------------------  Script  --------------------------------->
+
+    <script src="dati.js"></script>
+    <script>
+
+        function visualizza(chiave) {
+
+            s = "<table border='1'>";
+            s += "<tr>";
+               s += "<th class='numeri'></th>"
+               s += "<th> Stato </th>";
+               s += "<th> Provincia </th>";
+               s += "<th> Popolazione </th>";
+            s += "</tr>";
+
+            chiave = chiave.toUpperCase();
+            var cont = 0;
+
+            for (var i in DB) {
+
+                des = DB[i].SOV0NAME.toUpperCase();
+
+                if (des.indexOf(chiave) >= 0) {
+                    if (cont % 2 == 0) {
+                        s += "<tr class='pari'>";
+                    }
+                    else {
+                        s += "<tr class='dispari'>"
+                    }
+                    cont++;
+
+                        s += "<th class='numeri'>" + cont + "</th>"
+                        s += "<td>" + DB[i].SOV0NAME + "</td>";
+					    s += "<td>" + DB[i].NAMEASCII + "</td>";
+					    s += "<td>" + DB[i].POP_MAX + "</td>";
+					 s += "</tr>";
+
+                }
+            }
+            s += "<hr />";
+
+            if (cont != 0)
+            {
+                document.getElementById("P1").innerHTML = s;
+                document.getElementById("Alert").innerHTML = "";
+            }
+            else
+            {
+                document.getElementById("Alert").innerHTML = "<div class='alert'><span class='closebtn' onclick='this.parentElement.style.display=" +"'none'" +";'>&times;</span><strong>Attenzione!</strong> Indicare uno Stato corretto!</div>"
+            }
+            
+        }
+
+    </script>
+</head>
+
+
+<!---------------------------------  HTML  --------------------------------->
+
+<body onload="visualizza(Text1.value)">
+
+    <strong>
+        <input id="Text1" type="text" value="" onkeyup="visualizza(Text1.value)" placeholder="Inserisci uno stato" />
+        <!--<input id="Button1" type="button" value="Cerca!" onclick="visualizza(Text1.value)" />-->
+    </strong>
+
+    <p id="Alert"></p>
+ 
+    <div id="P1" style="font-family:Courier New, Courier, monospace"></div>
+</body>
+
+
+</html>

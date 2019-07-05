@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JSON - Es1</title>
+    <style>
+        .pari { background-color:#cc8383}
+        .titolo {background-color:red}
+        .dispari {background-color:#51c7cf}
+        table {
+            border-width: thin;
+            border-collapse: collapse;
+            border-color: black;
+            border-style: solid;
+
+        }
+        .bottone24 {
+            border-color: #ff6a00;
+            background-color:green;
+            color: black;
+        }
+        #scelta {
+            background-color: yellow;
+            border-style:solid;
+        }
+    </style>
+    <script src="campionato.js"></script>
+    <script>
+
+        var elenco =[];  // elenco completo con elementi ripetuti
+        var singoli = []; // elenco senza elementi ripetuti
+        var elencogironi = [];
+        var singoligironi = [];
+        var x;
+        var y;
+
+        function visualizza() {
+            x = document.getElementById("scelta").selectedIndex;
+            y = document.getElementById("scelta").options;
+            s = "<table border='1'>";
+            s += "<tr class='titolo'><td>Sig</td><td>Categoria</td><td>Girone</td><td>Società</td><td>Punti</td><td>G</td><td>V</td><td>N</td><td>P</td><td>Gf</td><td>Gs</td><td>Dif</td><td>Pen1</td><td>Pen2</td><td>Note</td></tr>";
+            for (var i in campionato) {
+                if (campionato[i].campionato == y[x].text) {
+                    if (i % 2 == 0) {
+                        s += "<tr><td class='pari'>" + campionato[i].sigla + "</td>"
+                        s += "<td class='pari'>" + campionato[i].campionato + "</td>"
+                        s += "<td class='pari'><center>" + campionato[i].girone + "</center></td>"
+                        s += "<td class='pari'>" + campionato[i].societa + "</td>"
+                        s += "<td class='pari'>" + campionato[i].punti + "</td>"
+                        s += "<td class='pari'>" + campionato[i].g + "</td>"
+                        s += "<td class='pari'>" + campionato[i].v + "</td>"
+                        s += "<td class='pari'>" + campionato[i].n + "</td>"
+                        s += "<td class='pari'>" + campionato[i].p + "</td>"
+                        s += "<td class='pari'>" + campionato[i].gf + "</td>"
+                        s += "<td class='pari'>" + campionato[i].gs + "</td>"
+                        s += "<td class='pari'>" + campionato[i].dif + "</td>"
+                        s += "<td class='pari'>" + campionato[i].pen1 + "</td>"
+                        s += "<td class='pari'>" + campionato[i].pen2 + "</td>"
+                        s += "<td class='pari'>" + campionato[i].note + "</td>"
+                        s += "<tr>"
+                    }
+                    else
+                    {
+                        s += "<tr><td class='dispari'>" + campionato[i].sigla + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].campionato + "</td>"
+                        s += "<td class='dispari'><center>" + campionato[i].girone + "</center></td>"
+                        s += "<td class='dispari'>" + campionato[i].societa + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].punti + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].g + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].v + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].n + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].p + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].gf + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].gs + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].dif + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].pen1 + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].pen2 + "</td>"
+                        s += "<td class='dispari'>" + campionato[i].note + "</td>"
+                        s += "<tr>"
+                    }
+                }
+                }
+            s += "</table>";
+            //document.write(s);
+            document.getElementById("P1").innerHTML = s;
+        }
+
+        function VisualizzaTutto() {
+            x = document.getElementById("scelta").selectedIndex;
+            y = document.getElementById("scelta").options;
+            s = "<table border='1'>";
+            s += "<tr class='titolo'><td>Sig</td><td>Categoria</td><td>Girone</td><td>Società</td><td>Punti</td><td>G</td><td>V</td><td>N</td><td>P</td><td>Gf</td><td>Gs</td><td>Dif</td><td>Pen1</td><td>Pen2</td><td>Note</td></tr>";
+            for (var i in campionato) {
+                if (i % 2 == 0) {
+                    s += "<tr><td class='pari'>" + campionato[i].sigla + "</td>"
+                    s += "<td class='pari'>" + campionato[i].campionato + "</td>"
+                    s += "<td class='pari'><center>" + campionato[i].girone + "</center></td>"
+                    s += "<td class='pari'>" + campionato[i].societa + "</td>"
+                    s += "<td class='pari'>" + campionato[i].punti + "</td>"
+                    s += "<td class='pari'>" + campionato[i].g + "</td>"
+                    s += "<td class='pari'>" + campionato[i].v + "</td>"
+                    s += "<td class='pari'>" + campionato[i].n + "</td>"
+                    s += "<td class='pari'>" + campionato[i].p + "</td>"
+                    s += "<td class='pari'>" + campionato[i].gf + "</td>"
+                    s += "<td class='pari'>" + campionato[i].gs + "</td>"
+                    s += "<td class='pari'>" + campionato[i].dif + "</td>"
+                    s += "<td class='pari'>" + campionato[i].pen1 + "</td>"
+                    s += "<td class='pari'>" + campionato[i].pen2 + "</td>"
+                    s += "<td class='pari'>" + campionato[i].note + "</td>"
+                    s += "<tr>"
+                }
+                else
+                {
+                    s += "<tr><td class='dispari'>" + campionato[i].sigla + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].campionato + "</td>"
+                    s += "<td class='dispari'><center>" + campionato[i].girone + "</center></td>"
+                    s += "<td class='dispari'>" + campionato[i].societa + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].punti + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].g + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].v + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].n + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].p + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].gf + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].gs + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].dif + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].pen1 + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].pen2 + "</td>"
+                    s += "<td class='dispari'>" + campionato[i].note + "</td>"
+                    s += "<tr>"
+                }
+            }
+
+            s += "</table>";
+            //document.write(s);
+            document.getElementById("P1").innerHTML = s;
+        }
+		
+        //------------------------------------------------------------------------------
+        // carica la lista dei campionati nel vettore elenco
+        //------------------------------------------------------------------------------
+        function caricaElencoCampionati(campionato)
+        {
+            for (var i in campionato) {
+                elenco[i] = campionato[i].campionato;   
+            }
+        }
+        		
+        //------------------------------------------------------------------------------
+        // ricerca all'interno del vettore singoli se il parametro 'elemento' è ripetuto
+        //------------------------------------------------------------------------------
+        function isRipetuto(singoli,elemento)
+        {
+            ripetuto=false;
+            for (j=0; j < singoli.length;j++)
+            {
+                if (singoli[j]==elemento)
+                {
+                    ripetuto=true;  // l'elemento si ripete
+                    break;
+                }
+            }
+            return ripetuto;
+        }
+		
+        //------------------------------------------------------------------------------
+        // carica a partire dal vettore elenco un vettore di elementi non ripetuti
+        //------------------------------------------------------------------------------
+        function caricaElencoSingoli(elenco) {
+            k = 0;
+            singoli[k] = elenco[0];
+
+            for (i = 1; i < elenco.length; i++) {
+                if (!isRipetuto(singoli, elenco[i])) {
+                    k++;
+                    singoli[k] = elenco[i];
+                }
+            }
+        }
+            function preparaSelect() {
+                caricaElencoCampionati(campionato);
+                elenco.sort();
+                caricaElencoSingoli(elenco);
+                s1="<strong>Seleziona il campionato:</strong> <br />"
+                s1 += "<select id='scelta'>" 
+                for (k = 0; k < singoli.length; k++) {
+                    s1 += "<option value='" + singoli[k] + "'>" + singoli[k] + "</option>";
+                }
+                s1 += "</select>"
+                document.getElementById("P2").innerHTML = s1;
+            }
+
+
+        ////// Gironi \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+            
+
+            function preparaSelectGironi() {
+                caricaElencoGironi(campionato);
+                elencogironi.sort();
+                caricaElencoSingoliGironi(elencogironi);
+                s2 = "<strong>Seleziona il Girone:</strong> <br />"
+                s2 += "<select id='scelta2'>"
+                for (k = 0; k < singoligironi.length; k++) {
+                    s2 += "<option value='" + singoligironi[k] + "'>" + singoligironi[k] + "</option>";
+                }
+                s2 += "</select>"
+                document.getElementById("P3").innerHTML = s2;
+            }
+
+            function caricaElencoGironi(campionato) {
+                j = 0;
+                for (var i in campionato) {
+                    if (campionato[i].campionato == y[x].text) {
+                        elencogironi[j] = campionato[i].girone;
+                        j++;
+                    }
+                    }
+                }
+            
+            function caricaElencoSingoliGironi(elencogironi) {
+                k = 0;
+                singoligironi[k] = elencogironi[0];
+
+                for (i = 1; i < elencogironi.length; i++) {
+                    if (!isRipetuto(singoligironi, elencogironi[i])) {
+                        k++;
+                        singoligironi[k] = elencogironi[i];
+                    }
+                }
+            }
+            
+
+
+        
+    </script>
+</head>
+
+<body onload="preparaSelect(); VisualizzaTutto(); preparaSelectGironi()">
+    <div id="P2" style="font-family:Courier New, Courier, monospace">Seleziona Il Campionato: </div>
+    <div id="P3" style="font-family:Courier New, Courier, monospace">Seleziona Il Girone: </div>
+    <input id="Button1" type="button" value="Cerca!" class="bottone24" onclick="visualizza();preparaSelectGironi()" /><input id="Button2" type="button" value="Visualizza Tutto" class="bottone24" onclick="VisualizzaTutto()" />
+    <hr />
+    <div id="P1" style="font-family:Courier New, Courier, monospace">Segnaposto ...</div>
+</body>
+</html>
